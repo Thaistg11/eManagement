@@ -1,9 +1,10 @@
 ﻿using eManagement.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace eManagement.Data
 {
-    public class ApplicationDbContex:DbContext
+    public class ApplicationDbContex:IdentityDbContext
     {
     public ApplicationDbContex(DbContextOptions options) : base(options)
         { 
