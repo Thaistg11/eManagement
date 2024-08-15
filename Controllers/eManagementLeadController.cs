@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eManagement.Data;
 using eManagement.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eManagement.Controllers
 {
+    [Authorize]
     public class eManagementLeadController : Controller
     {
         private readonly ApplicationDbContex _context;
