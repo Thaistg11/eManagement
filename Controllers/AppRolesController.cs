@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace eManagement.Controllers
 {
+    [Authorize]
     public class AppRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
