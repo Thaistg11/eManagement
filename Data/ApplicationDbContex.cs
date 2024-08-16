@@ -10,6 +10,8 @@ namespace eManagement.Data
         { 
         }
         public DbSet<eManagementLeadEntity> eManagementLeadEntity { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
       
     }
 }
