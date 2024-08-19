@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace eManagement.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Admin")]
     public class eManagementLeadController : Controller
     {
         private readonly ApplicationDbContex _context;
