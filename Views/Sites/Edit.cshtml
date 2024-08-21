@@ -1,0 +1,54 @@
+﻿@model eManagement.Models.Site
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Site</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="SiteName" class="control-label"></label>
+                <input asp-for="SiteName" class="form-control" />
+                <span asp-validation-for="SiteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress1" class="control-label"></label>
+                <input asp-for="Adress1" class="form-control" />
+                <span asp-validation-for="Adress1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress2" class="control-label"></label>
+                <input asp-for="Adress2" class="form-control" />
+                <span asp-validation-for="Adress2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCode" class="control-label"></label>
+                <input asp-for="PostCode" class="form-control" />
+                <span asp-validation-for="PostCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FoneNumeber" class="control-label"></label>
+                <input asp-for="FoneNumeber" class="form-control" />
+                <span asp-validation-for="FoneNumeber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

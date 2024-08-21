@@ -1,14 +1,11 @@
-﻿@model IEnumerable<eManagement.Models.eManagementLeadEntity>
+﻿@model IEnumerable<eManagement.Models.Site>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Site</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <div class="row">
     <div class="col-md-6">
         <form class="d-flex" asp-action="Index" asp-asp-controller="Site">
@@ -19,26 +16,27 @@
 
     </div>
 </div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.SiteName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.Adress1)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Mobile)
+                @Html.DisplayNameFor(model => model.Adress2)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.PostCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Setor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Source)
+                @Html.DisplayNameFor(model => model.FoneNumeber)
             </th>
             <th></th>
         </tr>
@@ -47,22 +45,19 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.SiteName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.Adress1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Mobile)
+                @Html.DisplayFor(modelItem => item.Adress2)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.PostCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Setor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Source)
+                @Html.DisplayFor(modelItem => item.FoneNumeber)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

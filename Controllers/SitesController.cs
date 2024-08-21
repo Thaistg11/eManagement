@@ -7,39 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using eManagement.Data;
 using eManagement.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace eManagement.Controllers
 {
-    [Authorize(Roles="Admin")]
-    public class eManagementLeadController : Controller
+    public class SitesController : Controller
     {
         private readonly ApplicationDbContex _context;
 
-        public eManagementLeadController(ApplicationDbContex context)
+        public SitesController(ApplicationDbContex context)
         {
             _context = context;
         }
 
-        // GET: eManagementLead
+        // GET: Sites
+
         public async Task<IActionResult> Index(string searchString)
         {
-            
-            var eManagementLead = await _context.eManagementLeadEntity.ToListAsync();
-
-            
+          
+            var site = await _context.Site.ToListAsync();
             if (!String.IsNullOrEmpty(searchString))
             {
-                eManagementLead = eManagementLead
-                    .Where(n => n.FirstName.Contains(searchString)
-                             || n.LastName.Contains(searchString)
-                             || n.Id.ToString().Contains(searchString))
-                    .ToList();
+                site = site.Where(n => n.SiteName.Contains(searchString)).ToList();
             }
 
-            return View(eManagementLead);
+            return View(site);
         }
-        // GET: eManagementLead/Details/5
+
+        // GET: Sites/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,39 +41,39 @@ namespace eManagement.Controllers
                 return NotFound();
             }
 
-            var eManagementLeadEntity = await _context.eManagementLeadEntity
+            var site = await _context.Site
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (eManagementLeadEntity == null)
+            if (site == null)
             {
                 return NotFound();
             }
 
-            return View(eManagementLeadEntity);
+            return View(site);
         }
 
-        // GET: eManagementLead/Create
+        // GET: Sites/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: eManagementLead/Create
+        // POST: Sites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Mobile,Email,Setor,Source")] eManagementLeadEntity eManagementLeadEntity)
+        public async Task<IActionResult> Create([Bind("Id,SiteName,Adress1,Adress2,PostCode,FoneNumeber")] Site site)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(eManagementLeadEntity);
+                _context.Add(site);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(eManagementLeadEntity);
+            return View(site);
         }
 
-        // GET: eManagementLead/Edit/5
+        // GET: Sites/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -87,22 +81,22 @@ namespace eManagement.Controllers
                 return NotFound();
             }
 
-            var eManagementLeadEntity = await _context.eManagementLeadEntity.FindAsync(id);
-            if (eManagementLeadEntity == null)
+            var site = await _context.Site.FindAsync(id);
+            if (site == null)
             {
                 return NotFound();
             }
-            return View(eManagementLeadEntity);
+            return View(site);
         }
 
-        // POST: eManagementLead/Edit/5
+        // POST: Sites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Mobile,Email,Setor,Source")] eManagementLeadEntity eManagementLeadEntity)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SiteName,Adress1,Adress2,PostCode,FoneNumeber")] Site site)
         {
-            if (id != eManagementLeadEntity.Id)
+            if (id != site.Id)
             {
                 return NotFound();
             }
@@ -111,12 +105,12 @@ namespace eManagement.Controllers
             {
                 try
                 {
-                    _context.Update(eManagementLeadEntity);
+                    _context.Update(site);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!eManagementLeadEntityExists(eManagementLeadEntity.Id))
+                    if (!SiteExists(site.Id))
                     {
                         return NotFound();
                     }
@@ -127,10 +121,10 @@ namespace eManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(eManagementLeadEntity);
+            return View(site);
         }
 
-        // GET: eManagementLead/Delete/5
+        // GET: Sites/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -138,34 +132,35 @@ namespace eManagement.Controllers
                 return NotFound();
             }
 
-            var eManagementLeadEntity = await _context.eManagementLeadEntity
+            var site = await _context.Site
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (eManagementLeadEntity == null)
+            if (site == null)
             {
                 return NotFound();
             }
 
-            return View(eManagementLeadEntity);
+            return View(site);
         }
 
-        // POST: eManagementLead/Delete/5
+        // POST: Sites/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var eManagementLeadEntity = await _context.eManagementLeadEntity.FindAsync(id);
-            if (eManagementLeadEntity != null)
+            var site = await _context.Site.FindAsync(id);
+            if (site != null)
             {
-                _context.eManagementLeadEntity.Remove(eManagementLeadEntity);
+                _context.Site.Remove(site);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool eManagementLeadEntityExists(int id)
+        private bool SiteExists(int id)
         {
-            return _context.eManagementLeadEntity.Any(e => e.Id == id);
+            return _context.Site.Any(e => e.Id == id);
         }
+
     }
 }
