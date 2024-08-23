@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace eManagement.Controllers
@@ -25,7 +26,7 @@ namespace eManagement.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(IdentityRole model)
+        public async Task<IActionResult> Create (IdentityRole model)
         {
             if (!_roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
             {
