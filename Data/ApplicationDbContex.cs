@@ -14,8 +14,6 @@ namespace eManagement.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         public DbSet<Site> Site { get; set; }
-
-        public DbSet<Department> Department { get; set; }
-
+      
     }
 }
