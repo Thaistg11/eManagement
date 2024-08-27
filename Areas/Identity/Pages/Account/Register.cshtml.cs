@@ -24,6 +24,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eManagement.Areas.Identity.Pages.Account
 {
+
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
