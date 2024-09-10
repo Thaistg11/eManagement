@@ -1,4 +1,5 @@
-﻿using eManagement.Models;
+﻿using eManagement.Data.Map;
+using eManagement.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,13 @@ namespace eManagement.Data
         public DbSet<Site> Site { get; set; }
 
         public DbSet<Department> Department { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder )
+        {
+           modelBuilder.ApplyConfiguration(new DepartmentMap());
+
+            base.OnModelCreating(modelBuilder);
+        }
 
     }
 }
